@@ -31,8 +31,8 @@ REST API Training creating a servlet using Maven and Java onto a server that run
         1. Apache CXF
         2. Rest Easy (JBOSS)
         3. Jersey
-- Microservices:
-    - have a bunch of services that utilize diff services to make business logic which clients have access 
+- Micro-services:
+    - have a bunch of services that utilize different services to make business logic which clients have access 
 - If you want to make something scalable, make it **stateless**
     - scale *out not vertical*
 - QueryParams are not required in the URLs
@@ -67,7 +67,7 @@ REST API Training creating a servlet using Maven and Java onto a server that run
     3. POST
        - create data
 	   - pass parameters in the body, but is a violation
-	   - people are doing this bc they don’t want to see the information on the URL
+	   - people are doing this because they don’t want to see the information on the URL
 
     4. DELETE
         - delete obj
@@ -79,7 +79,7 @@ REST API Training creating a servlet using Maven and Java onto a server that run
 #### Diagram:
 - Initial Line (status code: headers)
     - 100 informational
-    - 200 status ok
+    - 200 status OK
     - 300 redirects
     - 400 client side errors, can recover come, developers deal with this the most
     - 500 server side errors, cant recover come
