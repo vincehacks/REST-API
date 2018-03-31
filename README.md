@@ -1,6 +1,8 @@
 # REST-API (Representational State Transfer)
 
-REST API Training creating a servlet using Maven and Java onto a server that runs on Tomcat. Here are my notes:
+Created by Vince Chang </br>
+REST API Training creating a servlet using Maven and Java onto a server that
+runs on Tomcat. 
 
 
 #### Why everyone is excited:
@@ -67,7 +69,8 @@ REST API Training creating a servlet using Maven and Java onto a server that run
     3. POST
        - create data
 	   - pass parameters in the body, but is a violation
-	   - people are doing this because they don’t want to see the information on the URL
+	   - people are doing this because they don’t want to see the information
+       on the URL
 
     4. DELETE
         - delete obj
@@ -81,11 +84,13 @@ REST API Training creating a servlet using Maven and Java onto a server that run
     - 100 informational
     - 200 status OK
     - 300 redirects
-    - 400 client side errors, can recover come, developers deal with this the most
+    - 400 client side errors, can recover come, developers deal with this the
+    most
     - 500 server side errors, cant recover come
 - i.e nothing found in the DB, send back 404 
 - don’t violate the HTTP Protocol,
-- send back the correct status codes for REST developers to understand how to fix the problems
+- send back the correct status codes for REST developers to understand how to
+fix the problems
 
 
 #### Maven
