@@ -1,6 +1,9 @@
 /* Vince Chang
  * REST API Training
  * 3/28/18
+ * 
+ * @Consumes what I will accept
+ * @Produces what I will give
  */
 
 package com.macys.rest;

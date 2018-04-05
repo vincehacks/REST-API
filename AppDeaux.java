@@ -17,6 +17,9 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("v2")
 public class AppDeaux extends Application {
 	
+	// The ? will resolve to the correct type at runtime, you also do not need
+	// to specify the types inside HashSet<> because it is defined when
+	// Set<Class<?>> defines it! (This feature is new in Java 8+)
 	private Set<Class<?>> resources = new HashSet<>();
 	
 	public AppDeaux() {

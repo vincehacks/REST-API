@@ -5,7 +5,7 @@ REST API Training creating a servlet using Maven and Java onto a server that
 runs on Tomcat. 
 
 
-### Restful Web Services in Jersey and JAX-RS (Instructor: John)
+# Restful Web Services in Jersey and JAX-RS (Instructor: John)
 
 
 #### Why everyone is excited:
@@ -103,7 +103,7 @@ fix the problems
 - to run build: mvn test, build, package
 
 
-### Restful Web Services in Spring (Instructor: Marnie)
+# Restful Web Services in Spring (Instructor: Marnie)
 
 
 #### What is REST?
@@ -228,7 +228,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 `@XmlRootElement` on the class
 - For JSON compatibility, we need the Jackson APIs (specifically the
 jackson-databind api)
-    - By using @RestController, we just need to have the databind api available and it will take care of reading to and from JSON without anything else needed on our part
+    - By using @RestController, we just need to have the databind api available
+    and it will take care of reading to and from JSON without anything else
+    needed on our part
 
 
 #### JAXB (Java API for XML Binding)
@@ -237,7 +239,8 @@ jackson-databind api)
 - Use `@XMLRootElement` to do this
 - ***This will be an error when using `@RequestBody` if you do not have
 `@XMLRootElement` in the class of what you are trying to use!***
-- API that allows Java objects to be marshalled (converted from Java to XML) and unmarshalled (converted from XML to Java)
+- API that allows Java objects to be marshalled (converted from Java to XML)
+and unmarshalled (converted from XML to Java)
 - Can write your own marshalling/unmarshalling, but not necessary
     - We have annotations that tell the entity how to convert
 ```
@@ -248,11 +251,215 @@ public class Address { private String street; private String city; ...
 
 
 #### @RequestBody and @ResponseBody
-- `@RequestBody` – defines that the body of the HTTP packet will contain the 'object' being passed into the method
-- `@ResponseBody` – defines that the response will be in the body of the HTTP packet
-- Both of these are used primarily in REST, and use their mappings to define the format (XML,JSON, etc.)
+- `@RequestBody` – defines that the body of the HTTP packet will contain the
+'object' being passed into the method
+- `@ResponseBody` – defines that the response will be in the body of the HTTP
+packet
+- Both of these are used primarily in REST, and use their mappings to define
+the format (XML,JSON, etc.)
 ```
 @RequestMapping(method=RequestMethod.GET)
 @ResponseBody
 public MapCoordinates getLocation(@RequestBody Address address) { ... }
+```
+
+
+# Spring REST Security
+ 
+
+#### Security
+- Who gets access to what, and how do we ensure that
+    - Authentication – Are you who you say you are? (you enter your info)
+    - Authorization – Are you allowed here? (confirms you are allowed)
+- Many different providers for each of these
+- Many different technologies that can be mixed and matched
+
+
+#### Spring Security
+- We need spring security JAR
+    - Security JAR: `spring-security-web` and `spring-security-config`
+    - Technology's JAR
+        - Spring has several packages of security classes, many of which are
+        specific to particular technologies
+- We configure
+    - Authentication connection information
+        - This is just what is needed for Spring to find it
+        - Says little to nothing about how the data is actually sent
+    - Authorization information
+    - Java is role based authorization
+    - Most of configuration is which roles a resource is restricted to
+
+
+#### Web Security Configuration
+- Main things is to annotate with `@EnableWebSecurity` && extend
+`WebSecurityConfigurerAdapter`
+```
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+    @Override
+    // This is the code that will talk to the security system (i.e Data Base)
+    public void configure(AuthenticationManagerBuilder amb)throws Exception{
+    ... }
+    
+    @Override
+    public void configure(HttpSecurity http)throws Exception{ ...
+    } 
+}
+```
+
+#### HttpSecurity
+```
+@Override
+public void configure(HttpSecurity http)throws Exception{
+    http.authorizeRequests().
+    antMatchers("/", "/home").permitAll().
+    anyRequest().authenticated().and().
+    formLogin().loginPage("/login").permitAll().and().
+    logout().permitAll();
+}
+```
+- Each step is considered in order
+    - The above says that we are using authorization
+    - Access to / or /home is allowed to anyone
+    - All other requests must be authenticated using the login page defined and
+    they have the ability to logout
+
+
+#### Configuration Explanation
+- `@EnableWebSecurity`
+    - Turns on web security
+- `WebSecurityConfigurerAdapter`
+    - Contains methods to override if needed for security configuration
+        - Authentication managers
+        - Authentication configuration
+        - Trust resolvers
+        - User details
+        - Etc.
+
+
+#### Configure HttpSecurity
+- Method to configure authorization for web pages
+    - Includes login pages, logout mechanism and pages for HttpStatus errors
+```
+@Override
+public void configure(HttpSecurity http)throws Exception{
+    http.authorizeRequests().antMatchers("/", "/home").permitAll(). antMatchers("/admin/**").hasRole("ADMIN"). anyRequest().authenticated().and(). formLogin().loginPage("/login").permitAll().and(). logout().permitAll(); 
+}
+```
+
+
+#### Configuring Authentication Managers
+- Method to override if you need to modify or add information to gain access to
+your authentication manager
+- This code snippet is creating a person and administrator in memory
+```
+@Override
+public void configure(AuthenticationManagerBuilder auth) throws Exception{
+    auth.inMemoryAuthentication(). withUser("person").password("pass").roles("USER").and(). withUser("administrator").password("aPass").roles("USER",
+    "ADMIN"); 
+}
+```
+
+
+#### Miscellaneous Security Notes
+- `@EnableGlobalMethodSecurity`
+    - Generally added to a configuration file
+        - Allows configuration using expression-based annotations
+        - Turns on AOP based security
+        - AOP is Aspect Oriented Programming
+            - Going to build aspects rather than objects
+            - Can write classes from a configuration standpoint know where it
+            is getting intercepted
+            - Can take pieces out and put them back in during runtime
+
+
+# Validation Using JSR-303
+
+
+#### Validation
+- Three ways to do validation
+    - Use the JSR-303 annotations
+    - Write your own
+    - A mix of the previous two
+- Using JSR-303, you simply use one of the annotations provided
+- For writing your own, you implement `ConstraintValidator` and you define a
+annotation for it
+- Configure a `DataBinder` if you want more control and/or don't want to use
+annotations
+
+
+#### JSR-303
+- Spring 3.0 and above support JSR-303. This JSR is all about validation via
+annotation
+- Primarily found in the
+    - `javax.validation.constraints` 
+    - `@NotNull`
+    - `@Min(<minimum value allowed>` 
+    - `@Max(<maximum value allowed>)`
+    - `@Future`
+    - `@Size`
+
+
+#### JAR Dependencies
+- Needs to be configured
+    - One part is the validation engine
+    - One part is the API to get the JSR-303 annotations
+```    
+<dependency>
+  <groupId>org.hibernate</groupId>
+  <artifactId>hibernate-validator</artifactId>
+  <version>5.0.1.Final</version>
+</dependency>
+
+<dependency>
+  <groupId>javax.validation</groupId>
+  <artifactId>validation-api</artifactId>
+  <version>1.1.0.Final</version>
+</dependency>
+```
+
+
+#### Preparing for Validation
+- To use validation, add the following bean into your configuration file
+```
+@Bean
+public Validator setup303Validation(){
+return new LocalValidatorFactoryBean();
+}
+```
+- This turns on validation
+    - There is an expectation that you have a provider loaded
+    - Comes from `org.springframework.validation.beanvalidation`
+    - Implements what is needed for both Spring and Java's validation
+    mechanisms
+
+
+#### Modify Your Model Class
+```
+public class Book {
+  @NotNull
+@Pattern(regexp="^(97(8|9))?\d{9}(\d|X)$") private String ISBN;
+  @NotNull
+  @Size(min=5, max=24)
+  private String author;
+@NotNull
+  private String title;
+@Past
+  private Date dueDate;
+...
+}
+```
+
+
+####  Modify Your Spring Bean
+```
+public class LibraryServiceImpl implements LibraryService{ 
+    private BookRepository repository;
+
+    public LibraryServiceImpl(BookRepository repository){ this.repository = repository;
+    }
+    public void addBook(@Valid Book b) { return repository.addBook(b);
+    }
+}
 ```

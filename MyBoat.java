@@ -17,8 +17,8 @@ public class MyBoat {
 	
 	@Override
 	public String toString() {
-		return "MyBoat [name=" + name + ", hp=" + hp + ", length=" + length + ", color=" + color + ", make=" + make
-				+ ", employees=" + employees + "]";
+		return "MyBoat [name=" + name + ", hp=" + hp + ", length=" + length +
+		", color=" + color + ", make=" + make + ", employees=" + employees + "]";
 	}
 	
 	public String getName() {
