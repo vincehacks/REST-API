@@ -10,8 +10,8 @@ import javax.ws.rs.PathParam;
 
 public class TheSub {
 
-	@GET
-	public String m1(@PathParam("id") String id) {
-		return "This is a sub resource ..." + id;
-	}
+  @GET
+  public String m1(@PathParam("id") String id) {
+    return "This is a sub resource ..." + id;
+  }
 }

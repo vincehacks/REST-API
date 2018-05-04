@@ -16,12 +16,12 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class RequestFilter implements ContainerRequestFilter {
 
-	@Override
-	public void filter(ContainerRequestContext requestContext) throws IOException {
-		String auth = requestContext.getHeaderString("macys-auth");
-		// If the header is null, we won't get to the rest of our other code!
-		if(auth == null) {
-			requestContext.abortWith(Response.status(401).entity("No soup for you!").build());
-		}
-	}
+  @Override
+  public void filter(ContainerRequestContext requestContext) throws IOException {
+    String auth = requestContext.getHeaderString("macys-auth");
+    // If the header is null, we won't get to the rest of our other code!
+    if(auth == null) {
+      requestContext.abortWith(Response.status(401).entity("No soup for you!").build());
+    }
+  }
 }

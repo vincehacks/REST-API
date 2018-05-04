@@ -9,9 +9,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
 public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
-	
-	@Override
-	public Response toResponse(Throwable exception) {
-		return Response.status(500).entity(exception.getMessage() + "<--Fix this").build();
-	}
+
+  @Override
+  public Response toResponse(Throwable exception) {
+    return Response.status(500).entity(exception.getMessage() + "<--Fix this").build();
+  }
 }

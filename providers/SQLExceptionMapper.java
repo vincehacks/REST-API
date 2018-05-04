@@ -15,11 +15,11 @@ import javax.ws.rs.ext.Provider;
 // By adding Provider, we are telling Jersey to load this provider instead
 @Provider
 public class SQLExceptionMapper implements ExceptionMapper<SQLException> {
-	
-	@Override
-	public Response toResponse(SQLException exception) {
-		// We are extending the REST Platform
-		ResponseBuilder builder = Response.status(500).entity(exception.getMessage());
-		return builder.build();
-	}
+
+  @Override
+  public Response toResponse(SQLException exception) {
+    // We are extending the REST Platform
+    ResponseBuilder builder = Response.status(500).entity(exception.getMessage());
+    return builder.build();
+  }
 }

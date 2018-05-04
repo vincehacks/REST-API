@@ -15,27 +15,27 @@ import com.macys.rest.providers.SQLExceptionMapper;
 
 @ApplicationPath("/v1")
 public class RestApp extends Application {
-	
-	private Set<Class<?>> resources = new HashSet<>();
-	private Set<Object> singletons = new HashSet<>();
 
-	public RestApp() {
-		System.out.println("Created V1 App");
-		resources.add(R1.class);
-		resources.add(R3.class);
-		resources.add(BoatResource.class);
-		resources.add(SQLExceptionMapper.class);
-		resources.add(GenericExceptionMapper.class);
-		resources.add(RequestFilter.class);
-		
-		singletons.add(new R5());
-	}
-	@Override
-	public Set<Class<?>> getClasses() {
-		return resources;
-	}
-	@Override
-	public Set<Object> getSingletons() {
-		return singletons;
-	}
+  private Set<Class<?>> resources = new HashSet<>();
+  private Set<Object> singletons = new HashSet<>();
+
+  public RestApp() {
+    System.out.println("Created V1 App");
+    resources.add(R1.class);
+    resources.add(R3.class);
+    resources.add(BoatResource.class);
+    resources.add(SQLExceptionMapper.class);
+    resources.add(GenericExceptionMapper.class);
+    resources.add(RequestFilter.class);
+
+    singletons.add(new R5());
+  }
+  @Override
+  public Set<Class<?>> getClasses() {
+    return resources;
+  }
+  @Override
+  public Set<Object> getSingletons() {
+    return singletons;
+  }
 }

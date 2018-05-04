@@ -17,43 +17,43 @@ import javax.ws.rs.core.UriInfo;
 
 @Path("r3/{id}")
 public class R3 {
-	
-	@PathParam("id")
-	private String id;
-	
-	@Context
-	private HttpHeaders heads;
-	
-	@Context
-	private UriInfo info;
-	
-	@Context
-	private HttpServletRequest req;
-	
-	public R3() {
-		System.out.println("Created R#...");
-	}
-	
-	@GET
-	public String m1() {
-		return "Welcome to R3..." + heads.getHeaderString("user-agent");
-	}
-	
-	@GET
-	@Path("info")
-	public String m2() {
-		UriBuilder builder = info.getBaseUriBuilder();
-		return builder.path("bubba").toString();
-	}
-	
-	@GET
-	@Path("req")
-	public String m3() {
-		return req.getParameter("bubba");
-	}
-	
-	@Path("z")
-	public TheSub m4() {
-		return new TheSub();
-	}
+
+  @PathParam("id")
+  private String id;
+
+  @Context
+  private HttpHeaders heads;
+
+  @Context
+  private UriInfo info;
+
+  @Context
+  private HttpServletRequest req;
+
+  public R3() {
+    System.out.println("Created R#...");
+  }
+
+  @GET
+  public String m1() {
+    return "Welcome to R3..." + heads.getHeaderString("user-agent");
+  }
+
+  @GET
+  @Path("info")
+  public String m2() {
+    UriBuilder builder = info.getBaseUriBuilder();
+    return builder.path("bubba").toString();
+  }
+
+  @GET
+  @Path("req")
+  public String m3() {
+    return req.getParameter("bubba");
+  }
+
+  @Path("z")
+  public TheSub m4() {
+    return new TheSub();
+  }
 }
