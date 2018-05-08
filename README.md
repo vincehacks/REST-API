@@ -3,15 +3,15 @@
 Created by Vince Chang </br>
 
 
-REST API exercises that demonstrate a servlet using Maven and Java
-onto a server that runs on Tomcat.
+REST API exercises that demonstrate a servlet using Maven and Java onto a server
+that runs on Tomcat.
 
 
 # Restful Web Services in Jersey and JAX-RS (Instructor: John)
 
 
 #### Why everyone is excited:
-- Client side: thick client 
+- Client side: thick client
 - NoSQL and REST go together
 - NoSQL has no locking
 - People can update at the same time and it won’t be a process issue
@@ -30,7 +30,7 @@ onto a server that runs on Tomcat.
 - Idea: treat everything out there like a resource
     - A service can get, post, delete, patch
 - Thick (web browser) -> Thin -> Rich -> Rich.next (angular, react) -> loop
-- When designing REST, start with the nouns 
+- When designing REST, start with the nouns
 - **JAX-WS** is for SOAP Services
 - **JAX-RS** is for REST Services
     - this is the standard for REST services
@@ -39,7 +39,7 @@ onto a server that runs on Tomcat.
         2. Rest Easy (JBOSS)
         3. Jersey
 - Micro-services:
-    - have a bunch of services that utilize different services to make business logic which clients have access 
+    - have a bunch of services that utilize different services to make business logic which clients have access
 - If you want to make something scalable, make it **stateless**
     - scale *out not vertical*
 - QueryParams are not required in the URLs
@@ -47,23 +47,23 @@ onto a server that runs on Tomcat.
 #### SOAP V.S REST
     SOAP
     - Design: WSDL: Web services description language
-    - Disc: UDDI: 
+    - Disc: UDDI:
 
     REST
     - Design: WADL:  Web application description language (but not really used)
-    - Disc: 
+    - Disc:
     - This whole concept is used with Swagger
         - can describe the service to you in a .json
     - REST needs 2 components:
         1. application
-        2. root resource 
+        2. root resource
 
 #### Rules
     1. Don’t violate the HTTP Protocol
     2. We use the verbs on an entity (job)
 
 #### Verbs
-    1. GET 
+    1. GET
         - Retrieve an obj
         - Pass parameters in the URL
         - GET request gives you *caching*
@@ -79,7 +79,7 @@ onto a server that runs on Tomcat.
 
     4. DELETE
         - delete obj
-    
+
     5. PATCH
         - update a part of the obj
 
@@ -92,15 +92,15 @@ onto a server that runs on Tomcat.
     - 400 client side errors, can recover come, developers deal with this the
     most
     - 500 server side errors, cant recover come
-- i.e nothing found in the DB, send back 404 
+- i.e nothing found in the DB, send back 404
 - don’t violate the HTTP Protocol,
 - send back the correct status codes for REST developers to understand how to
 fix the problems
 
 
 #### Maven
-- Maven is a build manager 
-- the builds will use spring dependencies 
+- Maven is a build manager
+- the builds will use spring dependencies
 - everything is stored in `home/.m2/repository`
 - to run build: mvn test, build, package
 
@@ -218,7 +218,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         {
           put("xml", MediaType.APPLICATION_XML); // JAXB Converter
           put("json", MediaType.APPLICATION_JSON); // Jackson Converter
-        } 
+        }
       });
 } }
 ```
@@ -267,7 +267,7 @@ public MapCoordinates getLocation(@RequestBody Address address) { ... }
 
 
 # Spring REST Security
- 
+
 
 #### Security
 - Who gets access to what, and how do we ensure that
@@ -303,10 +303,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     // This is the code that will talk to the security system (i.e Data Base)
     public void configure(AuthenticationManagerBuilder amb)throws Exception{
     ... }
-    
+
     @Override
     public void configure(HttpSecurity http)throws Exception{ ...
-    } 
+    }
 }
 ```
 
@@ -346,7 +346,7 @@ public void configure(HttpSecurity http)throws Exception{
 ```
 @Override
 public void configure(HttpSecurity http)throws Exception{
-    http.authorizeRequests().antMatchers("/", "/home").permitAll(). antMatchers("/admin/**").hasRole("ADMIN"). anyRequest().authenticated().and(). formLogin().loginPage("/login").permitAll().and(). logout().permitAll(); 
+    http.authorizeRequests().antMatchers("/", "/home").permitAll(). antMatchers("/admin/**").hasRole("ADMIN"). anyRequest().authenticated().and(). formLogin().loginPage("/login").permitAll().and(). logout().permitAll();
 }
 ```
 
@@ -359,7 +359,7 @@ your authentication manager
 @Override
 public void configure(AuthenticationManagerBuilder auth) throws Exception{
     auth.inMemoryAuthentication(). withUser("person").password("pass").roles("USER").and(). withUser("administrator").password("aPass").roles("USER",
-    "ADMIN"); 
+    "ADMIN");
 }
 ```
 
@@ -395,9 +395,9 @@ annotations
 - Spring 3.0 and above support JSR-303. This JSR is all about validation via
 annotation
 - Primarily found in the
-    - `javax.validation.constraints` 
+    - `javax.validation.constraints`
     - `@NotNull`
-    - `@Min(<minimum value allowed>` 
+    - `@Min(<minimum value allowed>`
     - `@Max(<maximum value allowed>)`
     - `@Future`
     - `@Size`
@@ -456,7 +456,7 @@ public class Book {
 
 ####  Modify Your Spring Bean
 ```
-public class LibraryServiceImpl implements LibraryService{ 
+public class LibraryServiceImpl implements LibraryService{
     private BookRepository repository;
 
     public LibraryServiceImpl(BookRepository repository){ this.repository = repository;
