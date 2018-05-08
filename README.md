@@ -1,8 +1,10 @@
 # REST-API (Representational State Transfer)
 
 Created by Vince Chang </br>
-REST API Training creating a servlet using Maven and Java onto a server that
-runs on Tomcat. 
+
+
+REST API exercises that demonstrate a servlet using Maven and Java
+onto a server that runs on Tomcat.
 
 
 # Restful Web Services in Jersey and JAX-RS (Instructor: John)
