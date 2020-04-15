@@ -1,3 +1,5 @@
+/* Created by Vince Chang */
+
 package entity;
 
 import java.util.Collections;
@@ -10,7 +12,7 @@ public class RelationshipTable {
   private static List<Relationship> relationships = new LinkedList<Relationship>();
 
   static {
-    for (Relationship x : new Relationship[]{
+    for (final Relationship x : new Relationship[]{
       new Relationship(new UUID(0, 1), new UUID(0, 1)), // Fred - Floor
       new Relationship(new UUID(0, 1), new UUID(0, 3)), // Fred - Garden
       new Relationship(new UUID(0, 2), new UUID(0, 2)), // Jim - Bullseye
@@ -32,9 +34,9 @@ public class RelationshipTable {
     return Collections.unmodifiableList(relationships);
   }
 
-  public static List<Supplier> findSuppliersOfCustomer(UUID custPk) {
-    List<Supplier> rv = new LinkedList<Supplier>();
-    for (Relationship r : relationships) {
+  public static List<Supplier> findSuppliersOfCustomer(final UUID custPk) {
+    final List<Supplier> rv = new LinkedList<Supplier>();
+    for (final Relationship r : relationships) {
       if (r.getCustomer().equals(custPk)) {
         rv.add(SupplierTable.findByPrimaryKey(r.getSupplier()));
       }
@@ -42,9 +44,9 @@ public class RelationshipTable {
     return rv;
   }
 
-  public static List<Customer> findCustomersOfSupplier(UUID supplierPk) {
-    List<Customer> rv = new LinkedList<Customer>();
-    for (Relationship r : relationships) {
+  public static List<Customer> findCustomersOfSupplier(final UUID supplierPk) {
+    final List<Customer> rv = new LinkedList<Customer>();
+    for (final Relationship r : relationships) {
       if (r.getSupplier().equals(supplierPk)) {
         rv.add(CustomerTable.findByPrimaryKey(r.getCustomer()));
       }

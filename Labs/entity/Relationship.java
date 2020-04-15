@@ -1,3 +1,5 @@
+/* Created by Vince Chang */
+
 package entity;
 
 import java.util.Objects;
