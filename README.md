@@ -5,9 +5,9 @@ Created by Vince Chang </br>
 REST API exercises that demonstrate a servlet using Maven and Java onto a server
 that runs on Tomcat.
 
-# Restful Web Services in Jersey and JAX-RS (Instructor: John)
+# RESTFUL WEB SERVICES IN JERSEY & JAX-RS
 
-#### Why everyone is excited:
+#### WHY EVERYONE IS EXCITED:
 
 - Client side: thick client
 - NoSQL and REST go together
@@ -17,16 +17,16 @@ that runs on Tomcat.
 
 #### XML RULES:
 
-    1. Root
-    2. Open/Close
-    3. No Overlap
+1. Root
+2. Open/Close
+3. No Overlap
 
-#### SOAP (Simple Object Access Protocol)
+#### SOAP (SIMPLE OBJECT ACCESS PROTOCOL)
 
-- Soap is one of the reasons why we have REST
+- SOAP is one of the reasons why we have REST
 - REST takes web services and lines it up with HTTP protocol
-- Idea: treat everything out there like a resource
-  - A service can get, post, delete, patch
+- IDEA: treat everything out there like a resource
+  - A service can **get, post, delete, patch**
 - Thick (web browser) -> Thin -> Rich -> Rich.next (angular, react) -> loop
 - When designing REST, start with the nouns
 - **JAX-WS** is for SOAP Services
@@ -36,7 +36,7 @@ that runs on Tomcat.
     1. Apache CXF
     2. Rest Easy (JBOSS)
     3. Jersey
-- Micro-services:
+- **Micro-services**:
   - have a bunch of services that utilize different services to make business
     logic which clients have access
 - If you want to make something scalable, make it **stateless**
@@ -45,47 +45,53 @@ that runs on Tomcat.
 
 #### SOAP V.S REST
 
-    SOAP
-    - Design: WSDL: Web services description language
-    - Disc: UDDI:
+**SOAP**
 
-    REST
-    - Design: WADL:  Web application description language (but not really used)
-    - Disc:
-    - This whole concept is used with Swagger
-        - can describe the service to you in a .json
-    - REST needs 2 components:
-        1. application
-        2. root resource
+- Design: WSDL: Web services description language
+- Disc: UDDI:
 
-#### Rules
+**REST**
 
-    1. Don’t violate the HTTP Protocol
-    2. We use the verbs on an entity (job)
+- Design: WADL: Web application description language (but not really used)
+- Disc:
+- This whole concept is used with Swagger
+  - can describe the service to you in a `.json`
+- REST needs 2 components:
+  1. application
+  2. root resource
 
-#### Verbs
+#### RULES
 
-    1. GET
-        - Retrieve an obj
-        - Pass parameters in the URL
-        - GET request gives you *caching*
+1. Don’t violate the HTTP Protocol
+2. We use the verbs on an entity (job)
 
-    2. PUT
-        - update entire obj
+#### VERBS
 
-    3. POST
-       - create data
-       - pass parameters in the body, but is a violation
-       - people are doing this because they don’t want to see the information
-       on the URL
+1. **GET**
 
-    4. DELETE
-        - delete obj
+   - Retrieve an obj
+   - Pass parameters in the URL
+   - GET request gives you _caching_
 
-    5. PATCH
-        - update a part of the obj
+2. **PUT**
 
-#### Diagram:
+   - update entire obj
+
+3. **POST**
+
+   - create data
+   - pass parameters in the body, but is a violation
+   - people are doing this because they don’t want to see the information
+     on the URL
+
+4. **DELETE**
+
+   - delete obj
+
+5. **PATCH**
+   - update a part of the obj
+
+#### DIAGRAM
 
 - Initial Line (status code: headers)
   - 100 informational
@@ -95,20 +101,20 @@ that runs on Tomcat.
     most
   - 500 server side errors, cant recover come
 - i.e nothing found in the DB, send back 404
-- don’t violate the HTTP Protocol,
-- send back the correct status codes for REST developers to understand how to
+- Don’t violate the HTTP Protocol,
+- Send back the correct status codes for REST developers to understand how to
   fix the problems
 
-#### Maven
+#### MAVEN
 
 - Maven is a build manager
-- the builds will use spring dependencies
+- The builds will use spring dependencies
 - everything is stored in `home/.m2/repository`
-- to run build: mvn test, build, package
+- To run build: `mvn test, build, package`
 
-# Restful Web Services in Spring (Instructor: Marnie)
+# RESTFUL WEB SERVICES IN SPRING
 
-#### What is REST?
+#### WHAT IS REST?
 
 - An architecture
 - It is a mass silently agreed to process
@@ -119,7 +125,7 @@ that runs on Tomcat.
   - Available with Spring 3.0
   - Not an implementation of JAX-RS
 
-#### Modeling REST
+#### MODELING REST
 
 - Determine what is being exposed
   - Not everything in your application should be available.
@@ -129,12 +135,10 @@ that runs on Tomcat.
   - Should not be verbs (we could but we don't)
 - Add operations
   - What HTTP method should be available for each
-- Change your controller to be
-  - `@RestController`
-  - Makes some things easier
+- Change your controller to be `@RestController`
   - Opens up availability for REST specific annotations
 
-#### Exposure
+#### EXPOSURE
 
 - Rest can send different data types besides just Java objects or XML
   - Spring give us classes for translating to and from JSON
@@ -145,29 +149,31 @@ that runs on Tomcat.
       data type we want to send
     - `method` – what specific HTTP method will we respond to
 
-#### Defining Applications Used
+#### DEFINING APPLICATIONS USED
 
-```
+```java
+// Tells what response is expected
 @RequestMapping(consumes={"application/XML", "application/JSON"})
 @RequestMapping(headers="Accept=application/JSON") @RequestMapping(headers="Content-type=application/JSON")
 ```
 
-#### Operations
+#### OPERATIONS
 
 - These are the methods that define how we receive requests
 - If method is used, then request must match expected method
 - If no method defined, request can be any of them
-- Can take multiple operations `@RequestMapping(value="/book/{id}", method=RequestMethod.GET)`
+- Can take multiple operations
+  `@RequestMapping(value="/book/{id}", method=RequestMethod.GET)`
 
-#### Defining URIs
+#### DEFINING URIs
 
 - URIs are not supposed to tell you what method or class that they are calling
-- Supposed to 'dynamically reveal' data
+- Supposed to **dynamically reveal** data
 - Mostly use attribute 'method' to determine what is happening - Often use one
   `@RequestMapping` on entire class that has the value
   `@RequestMapping(method=RequestMethod.GET)`
 
-#### Methods Tell Us Something
+#### METHODS TELL US SOMETHING
 
 - **GET** : Retrieves; performs a 'select'
 - **POST** : Create new; No primary key
@@ -175,19 +181,19 @@ that runs on Tomcat.
 - **DELETE** : Remove
 - **HEAD & OPERATIONS** : 2 different methods to retrieve meta-data
 
-#### Handling Response Codes
+#### HANDLING RESPONSE CODES
 
 - General best practice
   - REST presumes no visual client
   - Client needs to know what to expect to determine what to do next when there
     isn't a human on the client side
 
-```
+```java
 @RequestMapping(method=RequestMethod.GET)
 @ResponseStatus(HttpStatus.OK)
 ```
 
-#### Methods Have Specific HTTP Response Codes
+#### METHODS HAVE SPECIFIC HTTP RESPONSE CODES
 
 - You may want to catch HTTP status codes in order to know how to proceed
 - **GET** : 200 - OK
@@ -195,10 +201,10 @@ that runs on Tomcat.
 - **PUT** : 201- Created; 404 - Not Found; 406 - Not Acceptable (format)
 - **DELETE** : 200 - OK; 404 - Not Found
 
-#### View Resolvers
+#### VIEW RESOLVERS
 
 - Determines what format responses are sent in
-- When we are dealing with REST we typically don;t have a view, think of it as
+- When we are dealing with REST we typically don't have a view, think of it as
   the XML being spit out as our view
 - RESTful services are more likely to return the object
   - We usually use a `ContentNegotiationConfigurer`
@@ -208,7 +214,7 @@ that runs on Tomcat.
 
 #### MvcConfig.xml
 
-```
+```java
 @Configuration
 @ComponentScan(basePackages="com.di.phonebook")
 @EnableWebMvc
@@ -228,18 +234,18 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 } }
 ```
 
-#### String Formats
+#### STRING FORMATS
 
 - Generally use either XML or JSON
 - For XML, we need to make the entity class JAXB compatible by using
   `@XmlRootElement` on the class
 - For JSON compatibility, we need the Jackson APIs (specifically the
-  jackson-databind api) - By using @RestController, we just need to have the
+  `jackson-databind api`) - By using `@RestController`, we just need to have the
   databind api available
   and it will take care of reading to and from JSON without anything else
   needed on our part
 
-#### JAXB (Java API for XML Binding)
+#### JAXB (JAVA API FOR XML BINDING)
 
 - Purpose is to convert objects from Java to a textual formal or vice versa
 - We have to make one annotation and it will know to convert to a XML file
@@ -251,13 +257,13 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 - Can write your own marshalling/unmarshalling, but not necessary
   - We have annotations that tell the entity how to convert
 
-```
+```java
 @XMLRootElement
 public class Address { private String street; private String city; ...
 }
 ```
 
-#### @RequestBody and @ResponseBody
+#### @RequestBody AND @ResponseBody
 
 - `@RequestBody` – defines that the body of the HTTP packet will contain the
   'object' being passed into the method
@@ -266,30 +272,30 @@ public class Address { private String street; private String city; ...
 - Both of these are used primarily in REST, and use their mappings to define
   the format (XML,JSON, etc.)
 
-```
+```java
 @RequestMapping(method=RequestMethod.GET)
 @ResponseBody
 public MapCoordinates getLocation(@RequestBody Address address) { ... }
 ```
 
-# Spring REST Security
+# SPRING REST SECURITY
 
-#### Security
+#### SECURITY
 
 - Who gets access to what, and how do we ensure that
-  - Authentication – Are you who you say you are? (you enter your info)
-  - Authorization – Are you allowed here? (confirms you are allowed)
+  - **Authentication** – Are you who you say you are? (you enter your info)
+  - **Authorization** – Are you allowed here? (confirms you are allowed)
 - Many different providers for each of these
 - Many different technologies that can be mixed and matched
 
-#### Spring Security
+#### SPRING SECURITY
 
 - We need spring security JAR
   - Security JAR: `spring-security-web` and `spring-security-config`
   - Technology's JAR
     - Spring has several packages of security classes, many of which are
       specific to particular technologies
-- We configure
+- We configure:
   - Authentication connection information
     - This is just what is needed for Spring to find it
     - Says little to nothing about how the data is actually sent
@@ -297,36 +303,36 @@ public MapCoordinates getLocation(@RequestBody Address address) { ... }
   - Java is role based authorization
   - Most of configuration is which roles a resource is restricted to
 
-#### Web Security Configuration
+#### WEB SECURITY CONFIGURATION
 
 - Main things is to annotate with `@EnableWebSecurity` && extend
   `WebSecurityConfigurerAdapter`
 
-```
+```java
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-    @Override
-    // This is the code that will talk to the security system (i.e Data Base)
-    public void configure(AuthenticationManagerBuilder amb)throws Exception{
-    ... }
+  @Override
+  // This is the code that will talk to the security system (i.e Data Base)
+  public void configure(AuthenticationManagerBuilder amb)throws Exception{
+  ... }
 
-    @Override
-    public void configure(HttpSecurity http)throws Exception{ ...
-    }
+  @Override
+  public void configure(HttpSecurity http)throws Exception{ ...
+  }
 }
 ```
 
 #### HttpSecurity
 
-```
+```java
 @Override
 public void configure(HttpSecurity http)throws Exception{
-    http.authorizeRequests().
-    antMatchers("/", "/home").permitAll().
-    anyRequest().authenticated().and().
-    formLogin().loginPage("/login").permitAll().and().
-    logout().permitAll();
+  http.authorizeRequests().
+  antMatchers("/", "/home").permitAll().
+  anyRequest().authenticated().and().
+  formLogin().loginPage("/login").permitAll().and().
+  logout().permitAll();
 }
 ```
 
@@ -336,7 +342,7 @@ public void configure(HttpSecurity http)throws Exception{
   - All other requests must be authenticated using the login page defined and
     they have the ability to logout
 
-#### Configuration Explanation
+#### CONFIGURATION EXPLANATION
 
 - `@EnableWebSecurity`
   - Turns on web security
@@ -346,54 +352,53 @@ public void configure(HttpSecurity http)throws Exception{
     - Authentication configuration
     - Trust resolvers
     - User details
-    - Etc.
 
-#### Configure HttpSecurity
+#### CONFIGURE HttpSecurity
 
 - Method to configure authorization for web pages
   - Includes login pages, logout mechanism and pages for HttpStatus errors
 
-```
+```java
 @Override
 public void configure(HttpSecurity http)throws Exception{
-    http.authorizeRequests().antMatchers("/", "/home").permitAll(). antMatchers("/admin/**").hasRole("ADMIN"). anyRequest().authenticated().and(). formLogin().loginPage("/login").permitAll().and(). logout().permitAll();
+  http.authorizeRequests().antMatchers("/", "/home").permitAll(). antMatchers("/admin/**").hasRole("ADMIN"). anyRequest().authenticated().and(). formLogin().loginPage("/login").permitAll().and(). logout().permitAll();
 }
 ```
 
-#### Configuring Authentication Managers
+#### CONFIGURING AUTHENTICATION MANAGERS
 
 - Method to override if you need to modify or add information to gain access to
   your authentication manager
 - This code snippet is creating a person and administrator in memory
 
-```
+```java
 @Override
 public void configure(AuthenticationManagerBuilder auth) throws Exception{
-    auth.inMemoryAuthentication(). withUser("person").password("pass").roles("USER").and(). withUser("administrator").password("aPass").roles("USER",
-    "ADMIN");
+  auth.inMemoryAuthentication(). withUser("person").password("pass").roles("USER").and(). withUser("administrator").password("aPass").roles("USER",
+  "ADMIN");
 }
 ```
 
-#### Miscellaneous Security Notes
+#### MISCELLANEOUS SECURITY NOTES
 
 - `@EnableGlobalMethodSecurity`
   - Generally added to a configuration file
     - Allows configuration using expression-based annotations
     - Turns on AOP based security
-    - AOP is Aspect Oriented Programming
+    - AOP is **Aspect Oriented Programming**
       - Going to build aspects rather than objects
       - Can write classes from a configuration standpoint know where it
         is getting intercepted
       - Can take pieces out and put them back in during runtime
 
-# Validation Using JSR-303
+# VALIDATION USING JSR-303 (JAVA SPECIFICATION REQUESTS)
 
-#### Validation
+#### VALIDATION
 
 - Three ways to do validation
-  - Use the JSR-303 annotations
-  - Write your own
-  - A mix of the previous two
+  1. Use the JSR-303 annotations
+  2. Write your own
+  3. A mix of the previous two
 - Using JSR-303, you simply use one of the annotations provided
 - For writing your own, you implement `ConstraintValidator` and you define a
   annotation for it
@@ -412,13 +417,13 @@ public void configure(AuthenticationManagerBuilder auth) throws Exception{
   - `@Future`
   - `@Size`
 
-#### JAR Dependencies
+#### JAR DEPENDENCIES
 
 - Needs to be configured
   - One part is the validation engine
   - One part is the API to get the JSR-303 annotations
 
-```
+```xml
 <dependency>
   <groupId>org.hibernate</groupId>
   <artifactId>hibernate-validator</artifactId>
@@ -432,14 +437,14 @@ public void configure(AuthenticationManagerBuilder auth) throws Exception{
 </dependency>
 ```
 
-#### Preparing for Validation
+#### PREPARING FOR VALIDATION
 
 - To use validation, add the following bean into your configuration file
 
-```
+```java
 @Bean
 public Validator setup303Validation(){
-return new LocalValidatorFactoryBean();
+  return new LocalValidatorFactoryBean();
 }
 ```
 
@@ -449,32 +454,31 @@ return new LocalValidatorFactoryBean();
   - Implements what is needed for both Spring and Java's validation
     mechanisms
 
-#### Modify Your Model Class
+#### MODIFY YOUR MODEL CLASS
 
-```
+```java
 public class Book {
   @NotNull
-@Pattern(regexp="^(97(8|9))?\d{9}(\d|X)$") private String ISBN;
+  @Pattern(regexp="^(97(8|9))?\d{9}(\d|X)$") private String ISBN;
   @NotNull
   @Size(min=5, max=24)
   private String author;
-@NotNull
+  @NotNull
   private String title;
-@Past
+  @Past
   private Date dueDate;
-...
 }
 ```
 
-#### Modify Your Spring Bean
+#### MODIFY YOUR SPRING BEAN
 
-```
+```java
 public class LibraryServiceImpl implements LibraryService{
-    private BookRepository repository;
+  private BookRepository repository;
 
-    public LibraryServiceImpl(BookRepository repository){ this.repository = repository;
-    }
-    public void addBook(@Valid Book b) { return repository.addBook(b);
-    }
+  public LibraryServiceImpl(BookRepository repository){ this.repository = repository;
+  }
+  public void addBook(@Valid Book b) { return repository.addBook(b);
+  }
 }
 ```
